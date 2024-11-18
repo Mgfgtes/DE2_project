@@ -16,7 +16,7 @@ void pwm_init(void){
     TCCR0B |= (1 << CS02) | (1 << CS00);        //clock selection
     TCCR0B &= ~(1 << CS01);
 
-    OCR0A = 19;         //default servo angle 
+    OCR0A = 19;         //default servo´s angle 
     OCR0B = 19;
 
 }
