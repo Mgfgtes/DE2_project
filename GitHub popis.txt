@@ -1,0 +1,62 @@
+Body 1) a 2) se dělají pouze jednou, při naklonování GitHub repozitáře
+Bod 3) se opakuje při Commit a Push každé změny 
+
+
+
+
+
+
+
+
+1) Ve VS Code otevřít terminál a napsat do něj:
+ 
+
+
+git clone https://github.com/username/repository-name.git         
+
+
+        (username nahradit GitHub jménem toho, kdo repozitář vytvořil, repository-name nahradit jménem repozitáře)
+
+tím se repozitář stáhne do počítače 
+
+
+
+
+
+
+
+2) Ve VS Code otevřít naklonovaný repozitář z PC úložiště pomocí File -> Open Folder
+
+dál zkopírovat obsah projektu do této složky (naklonovaného repozitáře)
+
+
+
+
+
+
+
+3) Do terminálu otevřeného ve složce projektu ve VS Code zadat příkazy: 
+
+
+
+git add . 		(I S TEČKOU)
+
+git status
+
+git commit -m "Version (číslo verze) / DD.MM.RR / Popis změny anglicky" 
+
+git push origin main
+
+
+
+
+
+
+
+Pokud se bude Git ptát na email a jméno, zadat do terminálu příkazy: 
+
+
+
+git config --global user.email "email zadaný na GitHubu"
+
+git config --global user.name "jméno na GitHubu"
