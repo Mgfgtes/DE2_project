@@ -1,28 +1,54 @@
-// -- Includes -------------------------------------------------------
-#include <avr/io.h>         // AVR device-specific IO definitions
-#include <avr/interrupt.h>  // Interrupts standard C library for AVR-GCC
-// #include <twi.h>            // I2C/TWI library for AVR-GCC
-#include <stdio.h>          // C library. Needed for `sprintf`
+#include <Arduino.h>
+#include <avr/io.h>
+#include <util/delay.h>
+#include <uart.h>
+#include <timer.h>
 
+#define ADC_CHANNEL 0
 
-// -- Function definitions -------------------------------------------
-/*
- * Function: Main function where the program execution begins
- * Purpose:  
- * Returns:  none
- */
-int main(void)
-{
-    twi_init();
+uint16_t ldr_light_detect;
+char string[8];
 
-    sei();  // Needed for UART
-
-
-    // Infinite empty loop
-    while (1)
-    {
-    }
-
-    // Will never reach this
-    return 0;
+void adc_init(void) {
+  ADMUX = (1 <<REFS0) | (ADC_CHANNEL & 0x07);
+  ADCSRA = (1 <<ADEN) | (1 <<ADPS2) | (1 <<ADPS1) | (1 <<ADPS0);
 }
+
+uint16_t adc_read(void) {
+  ADCSRA |= (1 <<ADSC);
+  while (ADCSRA & (1 <<ADSC));
+  return ADC;
+}
+
+int main(void) {
+  
+  
+  uart_init(UART_BAUD_SELECT(9600, F_CPU));
+  TIM0_ovf_enable();
+  TIM0_ovf_16ms();
+  sei();
+
+  
+  adc_init();
+  DDRB |= (1<<PB0);
+
+  while (1) {
+    
+  }
+  return 0;
+}
+
+ISR(TIMER0_OVF_vect)
+{
+    static uint8_t n_ovfs = 0;
+
+    n_ovfs++;
+    if (n_ovfs >= 200) {
+    
+    ldr_light_detect = adc_read();
+    uart_puts(itoa(ldr_light_detect, string, 10));
+    uart_puts("\n");
+    //uart_puts("ahoj");
+    }
+}
+
