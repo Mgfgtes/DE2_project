@@ -3,6 +3,7 @@
 #include <util/delay.h>
 #include <uart.h>
 #include <timer.h>
+#include <pwm.h>
 
 #define ADC_CHANNEL 0
 
@@ -20,17 +21,22 @@ uint16_t adc_read(void) {
   return ADC;
 }
 
+
+
 int main(void) {
   
   
   uart_init(UART_BAUD_SELECT(9600, F_CPU));
+
+  pwm_init();
+
   TIM0_ovf_enable();
   TIM0_ovf_16ms();
   sei();
 
   
   adc_init();
-  DDRB |= (1<<PB0);
+  DDRB |= (1<<PB0);               //???????
 
   while (1) {
     
@@ -44,11 +50,9 @@ ISR(TIMER0_OVF_vect)
 
     n_ovfs++;
     if (n_ovfs >= 200) {
-    
-    ldr_light_detect = adc_read();
-    uart_puts(itoa(ldr_light_detect, string, 10));
-    uart_puts("\n");
-    //uart_puts("ahoj");
+      ldr_light_detect = adc_read();
+      uart_puts(itoa(ldr_light_detect, string, 10));
+      uart_puts("\n");
     }
 }
 
