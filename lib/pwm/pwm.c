@@ -1,9 +1,6 @@
 #include "pwm.h"
 
 void pwm_init(void){
-
-    DDRB |= (1 << DDB2) | (1 << DDB1);          //configure pin PB1 and PB2  as output
-
     TCCR1A &= ~(1 << COM1A0);                   //Compare Output Mode, Fast PWM Mode - Clear OC1A on Compare Match, set OC1A at BOTTOM (non-inverting mode)
     TCCR1A |= (1 << COM1A1);
 

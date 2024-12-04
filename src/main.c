@@ -1,12 +1,12 @@
 #include <Arduino.h>
 #include <avr/io.h>
-#include <util/delay.h>
 #include <uart.h>
 #include <timer.h>
 #include <pwm.h>
-#include <gpio.h>
-#include <stdio.h>
-#include <math.h>
+#include <adc.h>
+#include <util/delay.h>
+
+
 
 #define UP_LDR_PIN 0
 #define DOWN_LDR_PIN 1
@@ -14,33 +14,72 @@
 #define RIGHT_LDR_PIN 3
 #define BATTERY_VOLTAGE 4
 
-#define TOP 3949
-#define BOTTOM 2049
+#define TOP 5199
+#define BOTTOM 99
 
 float voltage_battery = 0;
-
-
 uint16_t ldr_light_detect;
-char string[8];
+char string[8];                             //string for lcd
 
-void adc_init(void) {
+volatile uint8_t flag_interrupt = 0;
+
+void battery_voltage_reading(){
+
+  voltage_battery = (adc_read(BATTERY_VOLTAGE)*0.0048828125);
+  uart_puts("\nvoltage battery:");
+  uint8_t whole_part = voltage_battery;
+  uart_puts(itoa(whole_part, string, 10));
+  uart_puts(".");
+  uart_puts(itoa((voltage_battery - whole_part)*100, string, 10));
+  uart_puts("\n");
+
+}
+
+
+void position_adjust(){
+
+  ldr_light_detect = adc_read(UP_LDR_PIN);
+  uart_puts("UP: ");
+  uart_puts(itoa(ldr_light_detect, string, 10));
+  uart_puts("\n");
+
+  ldr_light_detect = adc_read(DOWN_LDR_PIN);
+  uart_puts("DOWN: ");
+  uart_puts(itoa(ldr_light_detect, string, 10));
+  uart_puts("\n");
+
+  ldr_light_detect = adc_read(LEFT_LDR_PIN);
+  uart_puts("LEFT: ");
+  uart_puts(itoa(ldr_light_detect, string, 10));
+  uart_puts("\n");
+
+  ldr_light_detect = adc_read(RIGHT_LDR_PIN);
+  uart_puts("RIGHT: ");
+  uart_puts(itoa(ldr_light_detect, string, 10));
+  uart_puts("\n");
+  uart_puts("\n");
+      
+
+  if ((adc_read(UP_LDR_PIN) < adc_read(DOWN_LDR_PIN)) && (OCR1B < TOP)) {
+    OCR1B += 100;
+  }
   
-  ADCSRA = (1 <<ADEN) | (1 <<ADPS2) | (1 <<ADPS1) | (1 <<ADPS0);
+  if (adc_read(UP_LDR_PIN) > adc_read(DOWN_LDR_PIN) && (OCR1B > BOTTOM)) {
+    OCR1B-=100;
+  }
+
+  if (adc_read(LEFT_LDR_PIN) < adc_read(RIGHT_LDR_PIN) && (OCR1A < TOP)) {
+    OCR1A+=100;
+  }
+
+  if (adc_read(LEFT_LDR_PIN) > adc_read(RIGHT_LDR_PIN) && (OCR1A > BOTTOM)) {
+    OCR1A-=100;
+  }
+
 }
-
-uint16_t adc_read(uint8_t channel) {
-  ADMUX = (1 <<REFS0) | (channel & 0x07);
-
-
-  ADCSRA |= (1 <<ADSC);
-  while (ADCSRA & (1 <<ADSC));
-  return ADC;
-}
-
-
 
 int main(void) {
-  
+  DDRB |= (1 << DDB2) | (1 << DDB1);          //configure pin PB1 and PB2  as output for PWM
   
   uart_init(UART_BAUD_SELECT(9600, F_CPU));
 
@@ -50,11 +89,17 @@ int main(void) {
   TIM0_ovf_16ms();
   sei();
 
-  
   adc_init();
-  DDRB |= (1<<PB5);               //???????
-
+  
   while (1) {
+
+    if (flag_interrupt==1)
+    {
+      battery_voltage_reading();
+      position_adjust();
+
+      flag_interrupt = 0;
+    }
     
   }
   return 0;
@@ -64,56 +109,11 @@ ISR(TIMER0_OVF_vect)
 {
     static uint8_t n_ovfs = 0;
 
-    n_ovfs++;
-    if (n_ovfs >= 100) {
-      //flag_interrupt = 1;
-
-      /*voltage_battery = (adc_read(BATTERY_VOLTAGE)*0.0048828125);
-      uart_puts("\nvoltage battery:");
-      uart_puts(itoa(voltage_battery, string, 10));
-      uart_puts(".");
-      uart_puts(itoa((voltage_battery % 1)*100, string, 10));
-      uart_puts("\n");
-      */
-
-
-      ldr_light_detect = adc_read(UP_LDR_PIN);
-      uart_puts("UP: ");
-      uart_puts(itoa(ldr_light_detect, string, 10));
-      uart_puts("\n");
-
-      ldr_light_detect = adc_read(DOWN_LDR_PIN);
-      uart_puts("DOWN: ");
-      uart_puts(itoa(ldr_light_detect, string, 10));
-      uart_puts("\n");
-
-      ldr_light_detect = adc_read(LEFT_LDR_PIN);
-      uart_puts("LEFT: ");
-      uart_puts(itoa(ldr_light_detect, string, 10));
-      uart_puts("\n");
-
-      ldr_light_detect = adc_read(RIGHT_LDR_PIN);
-      uart_puts("RIGHT: ");
-      uart_puts(itoa(ldr_light_detect, string, 10));
-      uart_puts("\n");
-      uart_puts("\n");
-      GPIO_toggle(&PORTB,PB5);
-      n_ovfs = 0;
-
-      if ((adc_read(UP_LDR_PIN) < adc_read(DOWN_LDR_PIN)) && (OCR1B < TOP)) {
-        OCR1B += 50;
-
-      }
-      if (adc_read(UP_LDR_PIN) > adc_read(DOWN_LDR_PIN) && (OCR1B > BOTTOM)) {
-        OCR1B-=50;
-      }
-      
-      if (adc_read(LEFT_LDR_PIN) < adc_read(RIGHT_LDR_PIN) && (OCR1A < TOP)) {
-        OCR1A+=50;
-      }
-      if (adc_read(LEFT_LDR_PIN) > adc_read(RIGHT_LDR_PIN) && (OCR1A > BOTTOM)) {
-        OCR1A-=50;
-      }
+    if (n_ovfs >= 30) {
+      flag_interrupt = 1;
+      n_ovfs = 0; 
     }
+
+    n_ovfs++;
 }
 
