@@ -6,8 +6,6 @@
 #include <adc.h>
 #include <util/delay.h>
 
-
-
 #define UP_LDR_PIN 0
 #define DOWN_LDR_PIN 1
 #define LEFT_LDR_PIN 2
