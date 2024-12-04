@@ -10,9 +10,13 @@
 #define DOWN_LDR_PIN 1
 #define LEFT_LDR_PIN 2
 #define RIGHT_LDR_PIN 3
+#define BATTERY_VOLTAGE 4
 
-#define TOP 65400
-#define BOTTOM 50
+#define TOP 3949
+#define BOTTOM 2049
+
+float voltage_battery = 0;
+
 
 uint16_t ldr_light_detect;
 char string[8];
@@ -99,6 +103,11 @@ ISR(TIMER0_OVF_vect)
       if (adc_read(LEFT_LDR_PIN) > adc_read(RIGHT_LDR_PIN) && (OCR1A > BOTTOM)) {
         OCR1A-=50;
       }
+
+      voltage_battery = (adc_read(BATTERY_VOLTAGE)*0.0048828125);
+      uart_puts("\n voltage battery:");
+      uart_puts(itoa(voltage_battery, string, 10));
+
     }
 
 }
