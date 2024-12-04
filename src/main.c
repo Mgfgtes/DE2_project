@@ -5,6 +5,8 @@
 #include <timer.h>
 #include <pwm.h>
 #include <gpio.h>
+#include <stdio.h>
+#include <math.h>
 
 #define UP_LDR_PIN 0
 #define DOWN_LDR_PIN 1
@@ -66,6 +68,15 @@ ISR(TIMER0_OVF_vect)
     if (n_ovfs >= 100) {
       //flag_interrupt = 1;
 
+      /*voltage_battery = (adc_read(BATTERY_VOLTAGE)*0.0048828125);
+      uart_puts("\nvoltage battery:");
+      uart_puts(itoa(voltage_battery, string, 10));
+      uart_puts(".");
+      uart_puts(itoa((voltage_battery % 1)*100, string, 10));
+      uart_puts("\n");
+      */
+
+
       ldr_light_detect = adc_read(UP_LDR_PIN);
       uart_puts("UP: ");
       uart_puts(itoa(ldr_light_detect, string, 10));
@@ -103,12 +114,6 @@ ISR(TIMER0_OVF_vect)
       if (adc_read(LEFT_LDR_PIN) > adc_read(RIGHT_LDR_PIN) && (OCR1A > BOTTOM)) {
         OCR1A-=50;
       }
-
-      voltage_battery = (adc_read(BATTERY_VOLTAGE)*0.0048828125);
-      uart_puts("\n voltage battery:");
-      uart_puts(itoa(voltage_battery, string, 10));
-
     }
-
 }
 
