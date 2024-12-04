@@ -29,7 +29,7 @@ void battery_voltage_reading(){
   uart_puts(itoa(whole_part, string, 10));
   uart_puts(".");
   uart_puts(itoa((voltage_battery - whole_part)*100, string, 10));
-  uart_puts("\n");
+  uart_puts("V\n");
 
 }
 
