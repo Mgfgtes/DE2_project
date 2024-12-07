@@ -71,7 +71,7 @@
 #define LCD_RS_PORT     PORTB
 #define LCD_RS_PIN      PB0
 #define LCD_E_PORT      PORTB
-#define LCD_E_PIN       PB1
+#define LCD_E_PIN       PB3
 // R/W pin is connected to GND on LCD Keypad Shield
 
 

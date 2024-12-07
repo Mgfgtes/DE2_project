@@ -1,6 +1,6 @@
 #include "pwm.h"
 
-void pwm_init(void){
+void TIM1_pwm_init(void){
     TCCR1A &= ~(1 << COM1A0);                   //Compare Output Mode, Fast PWM Mode - Clear OC1A on Compare Match, set OC1A at BOTTOM (non-inverting mode)
     TCCR1A |= (1 << COM1A1);
 
@@ -21,13 +21,13 @@ void pwm_init(void){
 
 }
 
-void pwm_compA_value(uint8_t val){          
+void TIM1_pwm_compA_value(uint8_t val){          
 
     OCR0A = val;
 
 }
 
-void pwm_compB_value(uint8_t val){          
+void TIM1_pwm_compB_value(uint8_t val){          
 
     OCR0B = val;
 
