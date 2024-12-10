@@ -23,3 +23,13 @@
 
 
   ![Schéma zapojení](Schema_zapojeni.png)
+
+
+## Popis programové části
+
+
+
+
+
+
+
