@@ -2,6 +2,10 @@
 
 ## Téma: Sledování parametrů a optimalizace solárního panelu
 
-<h2>Zadání č. </h2>
+## Na projektu pracovali: 
+
+* Matěj Matoušek (247142)
+* Vojtěch Larva ()
+* Petr Losert (247140)
 
   ![Schéma zapojení](Schema_zapojeni.png)
