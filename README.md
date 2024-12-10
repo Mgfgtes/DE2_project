@@ -8,4 +8,4 @@
 * Vojtěch Larva ()
 * Petr Losert (247140)
 
-  ![Schéma zapojení](Schema_zapojeni.png)
+  ![Schéma zapojení]()
