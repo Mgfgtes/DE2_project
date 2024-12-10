@@ -4,4 +4,4 @@
 
 <h2>Zadání č. </h2>
 
-
+  ![Schéma zapojení](hema-zapojeni.png)
