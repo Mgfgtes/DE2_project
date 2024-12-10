@@ -9,7 +9,7 @@
 * Petr Losert (247140)
 
 
-## Téma: Hardwarové komponenty a schéma zapojení
+## Hardwarové komponenty a schéma zapojení
 
 
   ![Schéma zapojení](Schema_zapojeni.png)
