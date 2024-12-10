@@ -4,4 +4,4 @@
 
 <h2>Zadání č. </h2>
 
-  ![Schéma zapojení](Schema-zapojeni.png)
+  ![Schéma zapojení](Schema_zapojeni.png)
