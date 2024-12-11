@@ -47,6 +47,9 @@ Obrázek č. 3: Schéma zapojení
  ![Obrázek zapojení](Foto_zapojeni.jpg)
 Obrázek č. 4: Fotografie zapojení
 
+ ![Obrázek zapojení](Foto_zapojeni.jpg)
+Obrázek č. 5: Fotografie zapojení
+
 
 Video ukázka: https://vutbr-my.sharepoint.com/personal/247140_vutbr_cz/_layouts/15/stream.aspx?id=%2Fpersonal%2F247140%5Fvutbr%5Fcz%2FDocuments%2FVideo%5Fukazka%2Emov&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E12e79ec5%2Dd800%2D464e%2D9faf%2D22afffdf9a8a
 
