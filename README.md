@@ -48,7 +48,7 @@ Obrázek č. 3: Schéma zapojení
 Obrázek č. 4: Fotografie zapojení
 
 
-![Running text](images/running_text.)
+![Video ukázka](20241209_095441000_iOS.mov)
 
 ## Použité nástroje 
 Inkscape - tvorba schémat  
