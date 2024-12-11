@@ -47,7 +47,7 @@ Obrázek č. 3: Schéma zapojení
  ![Obrázek zapojení](Foto_zapojeni.jpg)
 Obrázek č. 4: Fotografie zapojení
 
- ![Obrázek zapojení](Foto_zapojeni.jpg)
+ ![Obrázek zapojení](Foto_zapojeni2.jpg)
 Obrázek č. 5: Fotografie zapojení
 
 
