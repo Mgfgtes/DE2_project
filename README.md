@@ -22,7 +22,7 @@
 
 <a name="servo"></a>
 ### Servo motory MG90S
-Výrobce udává délku jedné periody PWM 20 ms, kde servo pracuje v rozsahu -90° až 90°. Úhlu natočení -90° odpovídá pulz o šířce 1 ms, natočení 90° poté šířka pulzu 2 ms. Časové intervaly jsme museli ovšem pro naši aplikaci doladit. Níže jsou časové průběhy PWM udávané výrobcem servo motorů. 
+Výrobce udává délku jedné periody PWM 20 ms, kde servo pracuje v rozsahu 0° až 180°. Úhlu natočení 0° odpovídá pulz o šířce 1 ms, natočení 180° poté šířka pulzu 2 ms. Časové intervaly jsme museli ovšem pro naši aplikaci doladit. Níže jsou časové průběhy PWM udávané výrobcem servo motorů. 
 ![Natočení serva](Natoceni_serva.png)
 Obrázek č. 1: Časové průběhy MG90S udávány výrobcem 
 
@@ -34,6 +34,16 @@ Projekt je realizován na na vývojové desce Arduino UNO postavené na 8-bitov�
 Obrázek č. 2: Schéma zapojení 
 
 ## Popis programové části
+
+## Zdrojové a hlavičkové soubory
+
+adc.h: https://github.com/Mgfgtes/DE2_project/blob/main/lib/adc/adc.h
+adc.c: https://github.com/Mgfgtes/DE2_project/blob/main/lib/adc/adc.c
+
+pwm.h: https://github.com/Mgfgtes/DE2_project/blob/main/lib/pwm/pwm.h
+pwm.c: https://github.com/Mgfgtes/DE2_project/blob/main/lib/pwm/pwm.c
+
+main.c: https://github.com/Mgfgtes/DE2_project/blob/main/src/main.c
 
 ### Popis běhu programu 
 Ve funkci _int main(void){}_ nejprve nastavujeme piny pro PWM PB1 a PB2 jako výstupní. Poté probíhá inicializace UARTu, LCD displeje a nastavení časovače TIM1 pro PWM (_uart_init(...);_, _lcd_init(...);_,_TIM1_pwm_init();_). Následně nastavíme povolovací vstup LCD displeje E (Enable) na nulu, čímž displej povolíme. Časovač TIM0 je využit pro mechanizmus přerušení, kdy jeho přetečení je nastaveno na 16 ms. Jeho nastavení probíhá v řádcích _TIM0_ovf_enable();_ - povolení časovače, _TIM0_ovf_16ms();_ - přetečení po 16 ms a _sei();_ - globálně povolit přerušení. Dále je zapnut ADC převodník pro výčet vstupních analogových hodnot (_adc_init();_).  
