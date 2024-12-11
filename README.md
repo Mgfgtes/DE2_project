@@ -32,11 +32,12 @@ Projekt je realizován na na vývojové desce Arduino UNO postavené na 8-bitov�
 Obrázek č. 2: Schéma zapojení 
 
 ## Popis programové části
-
+![Vývojový diagram funkce main(void)](Vyvojovy_diagram.png)
+Obrázek č. 3: Schéma zapojení
 
 ## Fotodokumentace a uživatelské ovládání
  ![Obrázek zapojení](Foto_zapojeni.jpg)
-Obrázek č. 3: Fotografie zapojení
+Obrázek č. 4: Fotografie zapojení
 
 ## Použité nástroje 
 
