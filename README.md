@@ -47,6 +47,9 @@ Obrázek č. 3: Schéma zapojení
  ![Obrázek zapojení](Foto_zapojeni.jpg)
 Obrázek č. 4: Fotografie zapojení
 
+
+![Running text](images/running_text.)
+
 ## Použité nástroje 
 Inkscape - tvorba schémat  
 SmartDraw - tvorba vývojových diagramů 
