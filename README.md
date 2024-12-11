@@ -34,7 +34,7 @@ Obrázek č. 2: Schéma zapojení
 ## Popis programové části
 
 ### Popis běhu programu 
-Ve funkci _int main(void)_ nejprve nastavujeme piny pro PWM PB1 a PB2 jako výstupní. Poté probíhá inicializace UARTu, LCD displeje a nastavení časovače TIM1 pro PWM (_uart_init(...)_, _lcd_init(...)_,_TIM1_pwm_init()_). Pin PB3 
+Ve funkci _int main(void){}_ nejprve nastavujeme piny pro PWM PB1 a PB2 jako výstupní. Poté probíhá inicializace UARTu, LCD displeje a nastavení časovače TIM1 pro PWM (_uart_init(...);_, _lcd_init(...);_,_TIM1_pwm_init();_). Následně nastavíme povolovací vstup LCD displeje E (Enable) na nulu, čímž displej povolíme. Časovač TIM0 je využit pro mechanizmus přerušení, kdy jeho přetečení je nastaveno na 16 ms. Jeho nastavení probíhá v řádcích _TIM0_ovf_enable();_ - povolení časovače, _TIM0_ovf_16ms();_ - přetečení po 16 ms a _sei();_ - globálně povolit přerušení. Dále je zapnut ADC převodník pro výčet vstupních analogových hodnot (_adc_init();_).    
 
 ![Vývojový diagram funkce main(void)](Vyvojovy_diagram.png)
 Obrázek č. 3: Schéma zapojení
