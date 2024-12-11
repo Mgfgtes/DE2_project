@@ -34,7 +34,11 @@ Obrázek č. 2: Schéma zapojení
 ## Popis programové části
 
 ### Popis běhu programu 
-Ve funkci _int main(void){}_ nejprve nastavujeme piny pro PWM PB1 a PB2 jako výstupní. Poté probíhá inicializace UARTu, LCD displeje a nastavení časovače TIM1 pro PWM (_uart_init(...);_, _lcd_init(...);_,_TIM1_pwm_init();_). Následně nastavíme povolovací vstup LCD displeje E (Enable) na nulu, čímž displej povolíme. Časovač TIM0 je využit pro mechanizmus přerušení, kdy jeho přetečení je nastaveno na 16 ms. Jeho nastavení probíhá v řádcích _TIM0_ovf_enable();_ - povolení časovače, _TIM0_ovf_16ms();_ - přetečení po 16 ms a _sei();_ - globálně povolit přerušení. Dále je zapnut ADC převodník pro výčet vstupních analogových hodnot (_adc_init();_).    
+Ve funkci _int main(void){}_ nejprve nastavujeme piny pro PWM PB1 a PB2 jako výstupní. Poté probíhá inicializace UARTu, LCD displeje a nastavení časovače TIM1 pro PWM (_uart_init(...);_, _lcd_init(...);_,_TIM1_pwm_init();_). Následně nastavíme povolovací vstup LCD displeje E (Enable) na nulu, čímž displej povolíme. Časovač TIM0 je využit pro mechanizmus přerušení, kdy jeho přetečení je nastaveno na 16 ms. Jeho nastavení probíhá v řádcích _TIM0_ovf_enable();_ - povolení časovače, _TIM0_ovf_16ms();_ - přetečení po 16 ms a _sei();_ - globálně povolit přerušení. Dále je zapnut ADC převodník pro výčet vstupních analogových hodnot (_adc_init();_).  
+
+V nekonečné smyčce (_while(1){}_) běží kód, kde jsou při podmínce setované vlajky  _flag_interrupt_ vykonány tři definované funkce: _LCD_print_info();_ - výpis údajů na LCD displej, _battery_voltage_uart();_ - posílání údaje o napětí akumulátoru do sériového monitoru, slouží pro ladění programu a _position_adjust();_ - slouží pro ovládání polohy servo motorů. Na konci podmínkového bloku je vlajka resetována.
+
+Vektor přerušení je volán každých 16 ms při přetečení čítače a obsahuje proměnnou _n_ovs_ a podmínku, která zajišťuje nastavení vlajky za každých 30 x 16 ms, tedy přibližně půl minuty. Po jejím nastavení je splněna podmínka v nekonečné smyčce a jsou opět provedeny funkce pro obsaluhu displeje a ovládání servo motorů. Půlminutový interval slouží pro demo aplikaci, aby bylo vidět otáčení servo motorů, avšak v praxi by dostačoval interval řádově delší z důvodu pomalého pohybu slunce.   
 
 ![Vývojový diagram funkce main(void)](Vyvojovy_diagram.png)
 Obrázek č. 3: Schéma zapojení
