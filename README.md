@@ -15,9 +15,14 @@
 * [Nabíjecí modul TP4056 se step-up měničem](#nmodul)
 * [LCD displej 2x16 znaků HD44780](#display)
 * [Servo motory MG90S](#servo)
-* [Solární panel](#solarpanel)
-* [Li-ion baterie](#battery)
-* [Elektronické součástky: čtyři fotorezistory, čtyři 1 kOhm rezistory, jeden 10 kOhm potenciometrický trimr](#elcomponents)
+* Solární panel
+* Li-ion baterie
+* Elektronické součástky: čtyři fotorezistory, čtyři 1 kOhm rezistory, jeden 10 kOhm potenciometrický trimr
+
+
+<a name="servo"></a>
+### Servo motory MG90S
+
 
   
 ### Popis zapojení komponent
@@ -27,6 +32,7 @@ Projekt je realizován na na vývojové desce Arduino UNO postavené na 8-bitov�
 
 
 ## Popis programové části
+
 
 ## Použité nástroje 
 
