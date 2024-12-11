@@ -4,9 +4,9 @@
 
 ## Na projektu pracovali: 
 
-* Matěj Matoušek (247142)
-* Vojtěch Larva (246886)
-* Petr Losert (247140)
+* Matěj Matoušek (247142) - PWM
+* Vojtěch Larva (246886) - ADC
+* Petr Losert (247140) - LCD
 
 
 ## Hardwarové komponenty a schéma zapojení
