@@ -23,7 +23,7 @@
  * The library contains functions for controlling Timer's 1 pin(s) with PWM.
  *
  * @note Based on AVR Libc Reference Manual. Tested on ATmega328P 
- *       (Arduino Uno), 16 MHz, AVR 8-bit Toolchain 3.6.2.
+ *       (Arduino Uno), 16 MHz, AVR 8-bit
  * @author Matej Matousek, Brno University of Technology, Czechia
  * @copyright (c) 2024 Matej Matousek, This work is licensed under 
  *                the terms of the MIT license

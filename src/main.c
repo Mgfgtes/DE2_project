@@ -1,3 +1,16 @@
+/***********************************************************************
+ * 
+ * Solar panel rotation with 16x2 alphanumeric display.
+ * 
+ * ATmega328P (Arduino Uno), 16 MHz, PlatformIO
+ *
+ * Copyright (c) 2024 Matej Matousek
+ * 
+ * This work is licensed under the terms of the MIT license.
+ *
+ **********************************************************************/
+
+/* Includes ----------------------------------------------------------*/
 #include <Arduino.h>
 #include <avr/io.h>
 #include <uart.h>
@@ -8,24 +21,52 @@
 #include <gpio.h>
 #include <util/delay.h>
 
+/* Pin definitions --------------------------------------------------*/
 #define UP_LDR_PIN 0
 #define DOWN_LDR_PIN 1
 #define LEFT_LDR_PIN 2
 #define RIGHT_LDR_PIN 3
 #define BATTERY_VOLTAGE 4
 
+/* Definitions of max servo rotation --------------------------------*/
 #define TOP 5199
 #define BOTTOM 99
 
-float voltage_battery = 0;
-uint16_t ldr_light_detect;
-char string[3];                             //string for lcd
 
+/*
+* Value for convertion of battery voltage
+*/
+float voltage_battery = 0;
+/*
+* Value from ADC for LDR
+*/
+uint16_t ldr_light_detect;
+/*
+* String for lcd and UART
+*/
+char string[3];
+/*
+* Flag used by interrupt
+*/
 volatile uint8_t flag_interrupt = 0;
 
-void battery_voltage_uart(){
+/* Function definitions ----------------------------------------------*/
 
+/*************************************************************************
+*  Function:    battery_voltage_uart()
+*  Purpose:     Read battery voltage and send value by UART.
+*  Returns:     none
+*************************************************************************/
+void battery_voltage_uart(){
+  
+  /*
+  * Read battery voltage and convert it with constant
+  */
   voltage_battery = (adc_read(BATTERY_VOLTAGE)*0.0048828125);
+
+  /*
+  * Print battery voltage as two integers
+  */
   uart_puts("\nvoltage battery:");
   uint8_t whole_part = voltage_battery;
   uart_puts(itoa(whole_part, string, 10));
@@ -35,7 +76,11 @@ void battery_voltage_uart(){
 
 }
 
-
+/*************************************************************************
+*  Function:    position_adjust()
+*  Purpose:     Check every LDR and adjust position acording to readings.
+*  Returns:     none
+*************************************************************************/
 void position_adjust(){
 
   if ((adc_read(UP_LDR_PIN) < adc_read(DOWN_LDR_PIN)) && (OCR1B < TOP)) {
@@ -56,7 +101,16 @@ void position_adjust(){
 
 }
 
+/*************************************************************************
+*  Function:    LCD_print_info()
+*  Purpose:     Read values from ADC (battery voltage and LDRs) and print it on alphanumeric LCD.
+*  Returns:     none
+*************************************************************************/
 void LCD_print_info(){
+
+  /*
+  * LDR values
+  */
   lcd_gotoxy(0,0);
   ldr_light_detect = adc_read(UP_LDR_PIN);
   lcd_puts("U:");
@@ -77,6 +131,10 @@ void LCD_print_info(){
   lcd_puts("R:");
   lcd_puts(itoa(ldr_light_detect, string, 10));
   
+
+  /*
+  * Battery voltage
+  */
   lcd_gotoxy(11,0);
   lcd_puts("BatV:");
   lcd_gotoxy(12,1);
@@ -88,23 +146,50 @@ void LCD_print_info(){
 }
 
 int main(void) {
-  DDRB |= (1 << DDB2) | (1 << DDB1);          //configure pin PB1 and PB2  as output for PWM
+  /*
+  * Configure pin PB1 and PB2  as output for PWM
+  */
+  DDRB |= (1 << DDB2) | (1 << DDB1);
   
-  uart_init(UART_BAUD_SELECT(9600, F_CPU));
-  lcd_init(LCD_DISP_ON);
-  TIM1_pwm_init();
-
+  /*
+  * Enable LCD
+  */
   GPIO_mode_output(&DDRB, PB3);
   GPIO_write_low(&PORTB, PB3);
 
+  /*
+  * Initialize UART
+  */
+  uart_init(UART_BAUD_SELECT(9600, F_CPU));
+
+  /*
+  * Initialize LCD
+  */
+  lcd_init(LCD_DISP_ON);
+  
+  /*
+  * Initialize PWM on Timer 1
+  */
+  TIM1_pwm_init();
+
+  
+  /*
+  * Initialize 16 ms Timer 0 overflow
+  */
   TIM0_ovf_enable();
   TIM0_ovf_16ms();
   sei();
 
+  /*
+  * Initialize ADC
+  */
   adc_init();
   
   while (1) {
 
+    /*
+    * Every cca 0,5 s check battery voltage and solar panel position
+    */
     if (flag_interrupt==1)
     {
       LCD_print_info();
