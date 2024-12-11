@@ -34,7 +34,7 @@ Obrázek č. 2: Schéma zapojení
 ## Popis programové části
 
 ### Popis běhu programu 
-Ve funkci _int main(void)_ nejprve nastavujeme piny pro PWM PB1 a PB2 jako výstupní. Poté probíhá inicializace UARTu, LCD displeje a nastavení časovače TIM1 pro PWM (_uart_init(...)_, _lcd_init(...)_,_TIM1_pwm_init()_).
+Ve funkci _int main(void)_ nejprve nastavujeme piny pro PWM PB1 a PB2 jako výstupní. Poté probíhá inicializace UARTu, LCD displeje a nastavení časovače TIM1 pro PWM (_uart_init(...)_, _lcd_init(...)_,_TIM1_pwm_init()_). Pin PB3 
 
 ![Vývojový diagram funkce main(void)](Vyvojovy_diagram.png)
 Obrázek č. 3: Schéma zapojení
