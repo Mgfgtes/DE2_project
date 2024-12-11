@@ -48,7 +48,7 @@ Obrázek č. 3: Schéma zapojení
 Obrázek č. 4: Fotografie zapojení
 
 
-![Video ukázka]()
+![Video ukázka](Video_ukazka.mov)
 
 ## Použité nástroje 
 Inkscape - tvorba schémat  
