@@ -12,8 +12,8 @@
 ## Hardwarové komponenty a schéma zapojení
 
 * Vývojová deska Arduino UNO
-* [Nabíjecí modul TP4056 se step-up měničem](#nmodul)
-* [LCD displej 2x16 znaků HD44780](#display)
+* Nabíjecí modul TP4056 se step-up měničem
+* LCD displej 2x16 znaků HD44780
 * [Servo motory MG90S](#servo)
 * Solární panel
 * Li-ion baterie
@@ -48,7 +48,8 @@ Obrázek č. 3: Schéma zapojení
 Obrázek č. 4: Fotografie zapojení
 
 ## Použité nástroje 
-
+Inkscape - tvorba schémat  
+SmartDraw - tvorba vývojových diagramů 
 
 
 
