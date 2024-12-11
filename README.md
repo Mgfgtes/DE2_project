@@ -34,6 +34,9 @@ Projekt je realizován na na vývojové desce Arduino UNO postavené na 8-bitov�
 ## Popis programové části
 
 
+## Fotodokumentace a uživatelské ovládání
+ ![Obrázek zapojení](Foto_zapojeni.png)
+
 ## Použité nástroje 
 
 
