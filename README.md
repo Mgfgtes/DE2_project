@@ -23,8 +23,8 @@
 <a name="servo"></a>
 ### Servo motory MG90S
 Výrobce udává délku jedné periody PWM 20 ms, kde servo pracuje v rozsahu -90° až 90°. Úhlu natočení -90° odpovídá pulz o šířce 1 ms, natočení 90° poté šířka pulzu 2 ms. Časové intervaly jsme museli ovšem pro naši aplikaci doladit. Níže jsou časové průběhy PWM udávané výrobcem servo motorů. 
-
-
+![Natočení serva](Natoceni_serva.png)
+Obrázek č. 1: Časové průběhy MG90S udávány výrobcem 
 
   
 ### Popis zapojení komponent
