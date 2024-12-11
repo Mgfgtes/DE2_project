@@ -5,7 +5,7 @@
 ## Na projektu pracovali: 
 
 * Matěj Matoušek (247142)
-* Vojtěch Larva ()
+* Vojtěch Larva (246886)
 * Petr Losert (247140)
 
 
