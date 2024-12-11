@@ -36,6 +36,7 @@ Obrázek č. 2: Schéma zapojení
 
 ## Fotodokumentace a uživatelské ovládání
  ![Obrázek zapojení](Foto_zapojeni.jpg)
+Obrázek č. 3: Fotografie zapojení
 
 ## Použité nástroje 
 
