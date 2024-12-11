@@ -1,0 +1,233 @@
+\doxysection{lcd.\+h}
+\hypertarget{lab__libs_2lcd_2lcd_8h_source}{}\label{lab__libs_2lcd_2lcd_8h_source}\index{lab\_libs/lcd/lcd.h@{lab\_libs/lcd/lcd.h}}
+\mbox{\hyperlink{lab__libs_2lcd_2lcd_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ LCD\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#\ define\ LCD\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{/*************************************************************************}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Title\ \ \ \ :\ \ \ C\ include\ file\ for\ the\ HD44780U\ LCD\ library\ (lcd.c)}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ Author:\ \ \ \ Peter\ Fleury\ <pfleury@gmx.ch>\ \ http://tinyurl.com/peterfleury}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ File:\ \ \ \ \ \ \ \ \$Id:\ lcd.h,v\ 1.14.2.4\ 2015/01/20\ 17:16:07\ peter\ Exp\ \$}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ Software:\ \ AVR-\/GCC\ 4.x}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Hardware:\ \ any\ AVR\ device,\ memory\ mapped\ mode\ only\ for\ AVR\ with}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ memory\ mapped\ interface\ (AT90S8515/ATmega8515/ATmega128)}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ ***************************************************************************/}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#include\ <inttypes.h>}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#include\ <avr/pgmspace.h>}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#if\ (\_\_GNUC\_\_\ *\ 100\ +\ \_\_GNUC\_MINOR\_\_)\ <\ 405}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#\ error\ "{}This\ library\ requires\ AVR-\/GCC\ 4.5\ or\ later,\ update\ to\ newer\ AVR-\/GCC\ compiler\ !"{}}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ *\ LCD\ and\ target\ specific\ definitions\ below\ can\ be\ defined\ in\ a\ separate\ include\ file\ with\ name\ lcd\_definitions.h\ instead\ modifying\ this\ file}}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ *\ All\ definitions\ added\ to\ the\ file\ lcd\_definitions.h\ will\ override\ the\ default\ definitions\ from\ lcd.h}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{lab__libs_2lcd_2lcd__definitions_8h}{lcd\_definitions.h}}"{}}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#ifndef\ LCD\_CONTROLLER\_KS0073}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#\ define\ LCD\_CONTROLLER\_KS0073\ 0\ }}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#ifndef\ LCD\_LINES}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#\ define\ LCD\_LINES\ 2\ }}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#ifndef\ LCD\_DISP\_LENGTH}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#\ define\ LCD\_DISP\_LENGTH\ 16\ }}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#ifndef\ LCD\_LINE\_LENGTH}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#\ define\ LCD\_LINE\_LENGTH\ 0x40\ }}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#ifndef\ LCD\_START\_LINE1}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#\ define\ LCD\_START\_LINE1\ 0x00\ }}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#ifndef\ LCD\_START\_LINE2}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#\ define\ LCD\_START\_LINE2\ 0x40\ }}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#ifndef\ LCD\_START\_LINE3}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#\ define\ LCD\_START\_LINE3\ 0x14\ }}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#ifndef\ LCD\_START\_LINE4}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#\ define\ LCD\_START\_LINE4\ 0x54\ }}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#ifndef\ LCD\_WRAP\_LINES}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#\ define\ LCD\_WRAP\_LINES\ 0\ }}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#define\ LCD\_IO\_MODE\ 1\ }}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#if\ LCD\_IO\_MODE}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_PORT}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#\ \ define\ LCD\_PORT\ PORTA\ }}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_DATA0\_PORT}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#\ \ define\ LCD\_DATA0\_PORT\ LCD\_PORT\ }}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_DATA1\_PORT}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#\ \ define\ LCD\_DATA1\_PORT\ LCD\_PORT\ }}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_DATA2\_PORT}}
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#\ \ define\ LCD\_DATA2\_PORT\ LCD\_PORT\ }}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_DATA3\_PORT}}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#\ \ define\ LCD\_DATA3\_PORT\ LCD\_PORT\ }}
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_DATA0\_PIN}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#\ \ define\ LCD\_DATA0\_PIN\ 0\ }}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_DATA1\_PIN}}
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#\ \ define\ LCD\_DATA1\_PIN\ 1\ }}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_DATA2\_PIN}}
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\#\ \ define\ LCD\_DATA2\_PIN\ 2\ }}
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_DATA3\_PIN}}
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#\ \ define\ LCD\_DATA3\_PIN\ 3\ }}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_RS\_PORT}}
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#\ \ define\ LCD\_RS\_PORT\ LCD\_PORT\ }}
+\DoxyCodeLine{00152\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_RS\_PIN}}
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#\ \ define\ LCD\_RS\_PIN\ 4\ }}
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00156\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_RW\_PORT}}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#\ \ define\ LCD\_RW\_PORT\ LCD\_PORT\ }}
+\DoxyCodeLine{00158\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_RW\_PIN}}
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\#\ \ define\ LCD\_RW\_PIN\ 5\ }}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_E\_PORT}}
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#\ \ define\ LCD\_E\_PORT\ LCD\_PORT\ }}
+\DoxyCodeLine{00164\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\#\ ifndef\ LCD\_E\_PIN}}
+\DoxyCodeLine{00166\ \textcolor{preprocessor}{\#\ \ define\ LCD\_E\_PIN\ 6\ }}
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#\ endif}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#elif\ defined(\_\_AVR\_AT90S4414\_\_)\ ||\ defined(\_\_AVR\_AT90S8515\_\_)\ ||\ defined(\_\_AVR\_ATmega64\_\_)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{00170\ \textcolor{preprocessor}{\ \ \ \ defined(\_\_AVR\_ATmega8515\_\_)\ ||\ defined(\_\_AVR\_ATmega103\_\_)\ ||\ defined(\_\_AVR\_ATmega128\_\_)\ ||\ \(\backslash\)}}
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\ \ \ \ defined(\_\_AVR\_ATmega161\_\_)\ ||\ defined(\_\_AVR\_ATmega162\_\_)}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ *\ memory\ mapped\ mode\ is\ only\ supported\ when\ the\ device\ has\ an\ external\ data\ memory\ interface}}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#\ define\ LCD\_IO\_DATA\ \ \ \ \ 0xC000\ }\textcolor{comment}{/*\ A15=E=1,\ A14=RS=1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00177\ \textcolor{preprocessor}{\#\ define\ LCD\_IO\_FUNCTION\ 0x8000\ }\textcolor{comment}{/*\ A15=E=1,\ A14=RS=0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00178\ \textcolor{preprocessor}{\#\ define\ LCD\_IO\_READ\ \ \ \ \ 0x0100\ }\textcolor{comment}{/*\ A8\ =R/W=1\ (R/W:\ 1=Read,\ 0=Write\ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{//\ if\ LCD\_IO\_MODE}}
+\DoxyCodeLine{00181\ \textcolor{preprocessor}{\#\ error\ "{}external\ data\ memory\ interface\ not\ available\ for\ this\ device,\ use\ 4-\/bit\ IO\ port\ mode"{}}}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ if\ LCD\_IO\_MODE}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#ifndef\ LCD\_DELAY\_BOOTUP}}
+\DoxyCodeLine{00197\ \textcolor{preprocessor}{\#\ define\ LCD\_DELAY\_BOOTUP\ 16000\ }}
+\DoxyCodeLine{00198\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\#ifndef\ LCD\_DELAY\_INIT}}
+\DoxyCodeLine{00200\ \textcolor{preprocessor}{\#\ define\ LCD\_DELAY\_INIT\ 5000\ }}
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00202\ \textcolor{preprocessor}{\#ifndef\ LCD\_DELAY\_INIT\_REP}}
+\DoxyCodeLine{00203\ \textcolor{preprocessor}{\#\ define\ LCD\_DELAY\_INIT\_REP\ 64\ }}
+\DoxyCodeLine{00204\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00205\ \textcolor{preprocessor}{\#ifndef\ LCD\_DELAY\_INIT\_4BIT}}
+\DoxyCodeLine{00206\ \textcolor{preprocessor}{\#\ define\ LCD\_DELAY\_INIT\_4BIT\ 64\ }}
+\DoxyCodeLine{00207\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00208\ \textcolor{preprocessor}{\#ifndef\ LCD\_DELAY\_BUSY\_FLAG}}
+\DoxyCodeLine{00209\ \textcolor{preprocessor}{\#\ define\ LCD\_DELAY\_BUSY\_FLAG\ 4\ }}
+\DoxyCodeLine{00210\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00211\ \textcolor{preprocessor}{\#ifndef\ LCD\_DELAY\_ENABLE\_PULSE}}
+\DoxyCodeLine{00212\ \textcolor{preprocessor}{\#\ define\ LCD\_DELAY\_ENABLE\_PULSE\ 1\ }}
+\DoxyCodeLine{00213\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00222\ \textcolor{comment}{/*\ instruction\ register\ bit\ positions,\ see\ HD44780U\ data\ sheet\ */}}
+\DoxyCodeLine{00223\ \textcolor{preprocessor}{\#define\ LCD\_CLR\ \ \ \ \ \ \ \ \ \ \ \ \ 0\ }\textcolor{comment}{/*\ DB0:\ clear\ display\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00224\ \textcolor{preprocessor}{\#define\ LCD\_HOME\ \ \ \ \ \ \ \ \ \ \ \ 1\ }\textcolor{comment}{/*\ DB1:\ return\ to\ home\ position\ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00225\ \textcolor{preprocessor}{\#define\ LCD\_ENTRY\_MODE\ \ \ \ \ \ 2\ }\textcolor{comment}{/*\ DB2:\ set\ entry\ mode\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00226\ \textcolor{preprocessor}{\#define\ LCD\_ENTRY\_INC\ \ \ \ \ \ \ 1\ }\textcolor{comment}{/*\ \ \ DB1:\ 1=increment,\ 0=decrement\ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00227\ \textcolor{preprocessor}{\#define\ LCD\_ENTRY\_SHIFT\ \ \ \ \ 0\ }\textcolor{comment}{/*\ \ \ DB2:\ 1=display\ shift\ on\ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00228\ \textcolor{preprocessor}{\#define\ LCD\_ON\ \ \ \ \ \ \ \ \ \ \ \ \ \ 3\ }\textcolor{comment}{/*\ DB3:\ turn\ lcd/cursor\ on\ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00229\ \textcolor{preprocessor}{\#define\ LCD\_ON\_DISPLAY\ \ \ \ \ \ 2\ }\textcolor{comment}{/*\ \ \ DB2:\ turn\ display\ on\ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00230\ \textcolor{preprocessor}{\#define\ LCD\_ON\_CURSOR\ \ \ \ \ \ \ 1\ }\textcolor{comment}{/*\ \ \ DB1:\ turn\ cursor\ on\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\#define\ LCD\_ON\_BLINK\ \ \ \ \ \ \ \ 0\ }\textcolor{comment}{/*\ \ \ \ \ DB0:\ blinking\ cursor\ ?\ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00232\ \textcolor{preprocessor}{\#define\ LCD\_MOVE\ \ \ \ \ \ \ \ \ \ \ \ 4\ }\textcolor{comment}{/*\ DB4:\ move\ cursor/display\ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00233\ \textcolor{preprocessor}{\#define\ LCD\_MOVE\_DISP\ \ \ \ \ \ \ 3\ }\textcolor{comment}{/*\ \ \ DB3:\ move\ display\ (0-\/>\ cursor)\ ?\ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00234\ \textcolor{preprocessor}{\#define\ LCD\_MOVE\_RIGHT\ \ \ \ \ \ 2\ }\textcolor{comment}{/*\ \ \ DB2:\ move\ right\ (0-\/>\ left)\ ?\ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00235\ \textcolor{preprocessor}{\#define\ LCD\_FUNCTION\ \ \ \ \ \ \ \ 5\ }\textcolor{comment}{/*\ DB5:\ function\ set\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00236\ \textcolor{preprocessor}{\#define\ LCD\_FUNCTION\_8BIT\ \ \ 4\ }\textcolor{comment}{/*\ \ \ DB4:\ set\ 8BIT\ mode\ (0-\/>4BIT\ mode)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00237\ \textcolor{preprocessor}{\#define\ LCD\_FUNCTION\_2LINES\ 3\ }\textcolor{comment}{/*\ \ \ DB3:\ two\ lines\ (0-\/>one\ line)\ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00238\ \textcolor{preprocessor}{\#define\ LCD\_FUNCTION\_10DOTS\ 2\ }\textcolor{comment}{/*\ \ \ DB2:\ 5x10\ font\ (0-\/>5x7\ font)\ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00239\ \textcolor{preprocessor}{\#define\ LCD\_CGRAM\ \ \ \ \ \ \ \ \ \ \ 6\ }\textcolor{comment}{/*\ DB6:\ set\ CG\ RAM\ address\ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00240\ \textcolor{preprocessor}{\#define\ LCD\_DDRAM\ \ \ \ \ \ \ \ \ \ \ 7\ }\textcolor{comment}{/*\ DB7:\ set\ DD\ RAM\ address\ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00241\ \textcolor{preprocessor}{\#define\ LCD\_BUSY\ \ \ \ \ \ \ \ \ \ \ \ 7\ }\textcolor{comment}{/*\ DB7:\ LCD\ is\ busy\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \textcolor{comment}{/*\ set\ entry\ mode:\ display\ shift\ on/off,\ dec/inc\ cursor\ move\ direction\ */}}
+\DoxyCodeLine{00244\ \textcolor{preprocessor}{\#define\ LCD\_ENTRY\_DEC\ \ \ \ \ \ \ 0x04\ }\textcolor{comment}{/*\ display\ shift\ off,\ dec\ cursor\ move\ dir\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00245\ \textcolor{preprocessor}{\#define\ LCD\_ENTRY\_DEC\_SHIFT\ 0x05\ }\textcolor{comment}{/*\ display\ shift\ on,\ \ dec\ cursor\ move\ dir\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00246\ \textcolor{preprocessor}{\#define\ LCD\_ENTRY\_INC\_\ \ \ \ \ \ 0x06\ }\textcolor{comment}{/*\ display\ shift\ off,\ inc\ cursor\ move\ dir\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00247\ \textcolor{preprocessor}{\#define\ LCD\_ENTRY\_INC\_SHIFT\ 0x07\ }\textcolor{comment}{/*\ display\ shift\ on,\ \ inc\ cursor\ move\ dir\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \textcolor{comment}{/*\ display\ on/off,\ cursor\ on/off,\ blinking\ char\ at\ cursor\ position\ */}}
+\DoxyCodeLine{00250\ \textcolor{preprocessor}{\#define\ LCD\_DISP\_OFF\ \ \ \ \ \ \ \ \ \ \ \ \ 0x08\ }\textcolor{comment}{/*\ display\ off\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00251\ \textcolor{preprocessor}{\#define\ LCD\_DISP\_ON\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0C\ }\textcolor{comment}{/*\ display\ on,\ cursor\ off\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00252\ \textcolor{preprocessor}{\#define\ LCD\_DISP\_ON\_BLINK\ \ \ \ \ \ \ \ 0x0D\ }\textcolor{comment}{/*\ display\ on,\ cursor\ off,\ blink\ char\ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00253\ \textcolor{preprocessor}{\#define\ LCD\_DISP\_ON\_CURSOR\ \ \ \ \ \ \ 0x0E\ }\textcolor{comment}{/*\ display\ on,\ cursor\ on\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00254\ \textcolor{preprocessor}{\#define\ LCD\_DISP\_ON\_CURSOR\_BLINK\ 0x0F\ }\textcolor{comment}{/*\ display\ on,\ cursor\ on,\ blink\ char\ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \textcolor{comment}{/*\ move\ cursor/shift\ display\ */}}
+\DoxyCodeLine{00257\ \textcolor{preprocessor}{\#define\ LCD\_MOVE\_CURSOR\_LEFT\ \ 0x10\ }\textcolor{comment}{/*\ move\ cursor\ left\ \ (decrement)\ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00258\ \textcolor{preprocessor}{\#define\ LCD\_MOVE\_CURSOR\_RIGHT\ 0x14\ }\textcolor{comment}{/*\ move\ cursor\ right\ (increment)\ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00259\ \textcolor{preprocessor}{\#define\ LCD\_MOVE\_DISP\_LEFT\ \ \ \ 0x18\ }\textcolor{comment}{/*\ shift\ display\ left\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00260\ \textcolor{preprocessor}{\#define\ LCD\_MOVE\_DISP\_RIGHT\ \ \ 0x1C\ }\textcolor{comment}{/*\ shift\ display\ right\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \textcolor{comment}{/*\ function\ set:\ set\ interface\ data\ length\ and\ number\ of\ display\ lines\ */}}
+\DoxyCodeLine{00263\ \textcolor{preprocessor}{\#define\ LCD\_FUNCTION\_4BIT\_1LINE\ \ 0x20\ }\textcolor{comment}{/*\ 4-\/bit\ interface,\ single\ line,\ 5x7\ dots\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00264\ \textcolor{preprocessor}{\#define\ LCD\_FUNCTION\_4BIT\_2LINES\ 0x28\ }\textcolor{comment}{/*\ 4-\/bit\ interface,\ dual\ line,\ \ \ 5x7\ dots\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00265\ \textcolor{preprocessor}{\#define\ LCD\_FUNCTION\_8BIT\_1LINE\ \ 0x30\ }\textcolor{comment}{/*\ 8-\/bit\ interface,\ single\ line,\ 5x7\ dots\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00266\ \textcolor{preprocessor}{\#define\ LCD\_FUNCTION\_8BIT\_2LINES\ 0x38\ }\textcolor{comment}{/*\ 8-\/bit\ interface,\ dual\ line,\ \ \ 5x7\ dots\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \textcolor{preprocessor}{\#define\ LCD\_MODE\_DEFAULT\ ((1\ <<\ LCD\_ENTRY\_MODE)\ |\ (1\ <<\ LCD\_ENTRY\_INC)\ )}}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00285\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__pfleury__lcd_ga9af28b2779326b63ff4356e2b1828984}{lcd\_init}}(uint8\_t\ dispAttr);}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00292\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__pfleury__lcd_gaf8da853dba4b9d5f2aea4e294444e14d}{lcd\_clrscr}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00299\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__pfleury__lcd_ga3aabf730aa4e0393bb5c959583c00a8e}{lcd\_home}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00309\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__pfleury__lcd_gadbf47a5efdf02367ded1ebf8f9edb5fe}{lcd\_gotoxy}}(uint8\_t\ x,\ uint8\_t\ y);}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00317\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__pfleury__lcd_gafa7e36b95c43d603f510273ad077cbbe}{lcd\_putc}}(\textcolor{keywordtype}{char}\ c);}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00325\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__pfleury__lcd_ga8ffdfcac7638368ff04364c14984266e}{lcd\_puts}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *s);}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00334\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__pfleury__lcd_ga9022a24a56a9b15681f62eb6ba77e5de}{lcd\_puts\_p}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *progmem\_s);}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00342\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__pfleury__lcd_gaea9d14f02df06f948cb5a56776980826}{lcd\_command}}(uint8\_t\ cmd);}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00352\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__pfleury__lcd_gad0729d2cba627825a089ca1fff12ba29}{lcd\_data}}(uint8\_t\ data);}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ }
+\DoxyCodeLine{00358\ \textcolor{preprocessor}{\#define\ lcd\_puts\_P(\_\_s)\ lcd\_puts\_p(PSTR(\_\_s))}}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00361\ \textcolor{comment}{//\ Added\ by\ Fryza,\ 2023}}
+\DoxyCodeLine{00368\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{group__pfleury__lcd_gae970fedb519064a734267ea75e46a8e9}{lcd\_custom\_char}}(uint8\_t\ addr,\ uint8\_t*\ charmap);}
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00372\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LCD\_H}}
+
+\end{DoxyCode}

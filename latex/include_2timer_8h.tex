@@ -1,0 +1,65 @@
+\doxysection{include/timer.h File Reference}
+\hypertarget{include_2timer_8h}{}\label{include_2timer_8h}\index{include/timer.h@{include/timer.h}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{Indent}\textbf{ Definitions for 16-\/bit Timer/\+Counter1}\par
+{\em \begin{DoxyNote}{Note}
+t\+\_\+\+OVF = 1/\+F\+\_\+\+CPU \texorpdfstring{$\ast$}{*} prescaler \texorpdfstring{$\ast$}{*} 2\texorpdfstring{$^\wedge$}{\string^}n where n = 16, F\+\_\+\+CPU = 16 MHz 
+\end{DoxyNote}
+}\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga85dff9eee7b0f0cc8a8a1d13793742a3}{TIM1\+\_\+stop}}()
+\begin{DoxyCompactList}\small\item\em Stop timer, prescaler 000 -\/-\/\texorpdfstring{$>$}{>} STOP. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_gaf7ab3cfd0255bfe28d33c905296542a2}{TIM1\+\_\+ovf\+\_\+4ms}}()
+\begin{DoxyCompactList}\small\item\em Set overflow 4ms, prescaler 001 -\/-\/\texorpdfstring{$>$}{>} 1. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga5bdf4bcd8840888a35d4d63dc143e417}{TIM1\+\_\+ovf\+\_\+33ms}}()
+\begin{DoxyCompactList}\small\item\em Set overflow 33ms, prescaler 010 -\/-\/\texorpdfstring{$>$}{>} 8. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga7c004a5eedc9545cc507748c74d98c3e}{TIM1\+\_\+ovf\+\_\+262ms}}()
+\begin{DoxyCompactList}\small\item\em Set overflow 262ms, prescaler 011 -\/-\/\texorpdfstring{$>$}{>} 64. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga5c71020e10568fdc70e69645aaba1cc5}{TIM1\+\_\+ovf\+\_\+1sec}}()
+\begin{DoxyCompactList}\small\item\em Set overflow 1s, prescaler 100 -\/-\/\texorpdfstring{$>$}{>} 256. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga42cf58b65675267decd4163f79ccc8eb}{TIM1\+\_\+ovf\+\_\+4sec}}()
+\begin{DoxyCompactList}\small\item\em Set overflow 4s, prescaler // 101 -\/-\/\texorpdfstring{$>$}{>} 1024. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_gac1a207184e47bbb528ecf745b90b1785}{TIM1\+\_\+ovf\+\_\+enable}}()
+\begin{DoxyCompactList}\small\item\em Enable overflow interrupt, 1 -\/-\/\texorpdfstring{$>$}{>} enable. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga6e73177fc69b0483ef91693ed0563c8d}{TIM1\+\_\+ovf\+\_\+disable}}()
+\begin{DoxyCompactList}\small\item\em Disable overflow interrupt, 0 -\/-\/\texorpdfstring{$>$}{>} disable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Definitions for 8-\/bit Timer/\+Counter0}\par
+{\em \begin{DoxyNote}{Note}
+t\+\_\+\+OVF = 1/\+F\+\_\+\+CPU \texorpdfstring{$\ast$}{*} prescaler \texorpdfstring{$\ast$}{*} 2\texorpdfstring{$^\wedge$}{\string^}n where n = 8, F\+\_\+\+CPU = 16 MHz 
+\end{DoxyNote}
+}\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga3931670d9c52eaad10cd63a7c5252161}{TIM0\+\_\+stop}}()
+\begin{DoxyCompactList}\small\item\em Stop timer, prescaler 000 -\/-\/\texorpdfstring{$>$}{>} STOP. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_gac7c3d585626125f63d1cd10ac5dc1aa5}{TIM0\+\_\+ovf\+\_\+16us}}()
+\begin{DoxyCompactList}\small\item\em Set overflow 16us, prescaler 001 -\/-\/\texorpdfstring{$>$}{>} 1. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga0078ae51d0b53cded81c3ad5f79d313f}{TIM0\+\_\+ovf\+\_\+128us}}()
+\begin{DoxyCompactList}\small\item\em Set overflow 128us, prescaler 010 -\/-\/\texorpdfstring{$>$}{>} 8. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga3b1c5e98b44e845a54f779a88cc18be0}{TIM0\+\_\+ovf\+\_\+1ms}}()
+\begin{DoxyCompactList}\small\item\em Set overflow 1ms, prescaler 011 -\/-\/\texorpdfstring{$>$}{>} 64. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga8df83b776bf7e7f063cef83397052190}{TIM0\+\_\+ovf\+\_\+4ms}}()
+\begin{DoxyCompactList}\small\item\em Set overflow 4ms, prescaler 100 -\/-\/\texorpdfstring{$>$}{>} 256. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_gaa06b2f1a2e4271fb35ffed0c32a74b3e}{TIM0\+\_\+ovf\+\_\+16ms}}()
+\begin{DoxyCompactList}\small\item\em Set overflow 16ms, prescaler // 101 -\/-\/\texorpdfstring{$>$}{>} 1024. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga91a59d33b7d88f63b16bafa1abf4fb66}{TIM0\+\_\+ovf\+\_\+enable}}()
+\begin{DoxyCompactList}\small\item\em Enable overflow interrupt, 1 -\/-\/\texorpdfstring{$>$}{>} enable. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga48765ea7560f38c48d5c09102375f278}{TIM0\+\_\+ovf\+\_\+disable}}()
+\begin{DoxyCompactList}\small\item\em Disable overflow interrupt, 0 -\/-\/\texorpdfstring{$>$}{>} disable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Definitions for 8-\/bit Timer/\+Counter2}\par
+{\em \begin{DoxyNote}{Note}
+t\+\_\+\+OVF = 1/\+F\+\_\+\+CPU \texorpdfstring{$\ast$}{*} prescaler \texorpdfstring{$\ast$}{*} 2\texorpdfstring{$^\wedge$}{\string^}n where n = 8, F\+\_\+\+CPU = 16 MHz 
+\end{DoxyNote}
+}\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__fryza__timer_gab0e35246006d940cc30d68fcab39b0f0}{TIM2\+\_\+stop}}()
+\begin{DoxyCompactList}\small\item\em Stop timer, prescaler 000 -\/-\/\texorpdfstring{$>$}{>} STOP. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga790278ed6899dcac64131c225867fdd1}{TIM2\+\_\+ovf\+\_\+16ms}}()
+\begin{DoxyCompactList}\small\item\em Set overflow 16ms, prescaler // 111 -\/-\/\texorpdfstring{$>$}{>} 1024. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga60fb7921c9e30f8449b07580f21b1c2d}{TIM2\+\_\+ovf\+\_\+enable}}()
+\begin{DoxyCompactList}\small\item\em Enable overflow interrupt, 1 -\/-\/\texorpdfstring{$>$}{>} enable. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__fryza__timer_ga268280d57c3bfed78089d7cbbec98338}{TIM2\+\_\+ovf\+\_\+disable}}()
+\begin{DoxyCompactList}\small\item\em Disable overflow interrupt, 0 -\/-\/\texorpdfstring{$>$}{>} disable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}

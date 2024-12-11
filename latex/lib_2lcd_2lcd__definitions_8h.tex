@@ -1,0 +1,53 @@
+\doxysection{lib/lcd/lcd\+\_\+definitions.h File Reference}
+\hypertarget{lib_2lcd_2lcd__definitions_8h}{}\label{lib_2lcd_2lcd__definitions_8h}\index{lib/lcd/lcd\_definitions.h@{lib/lcd/lcd\_definitions.h}}
+\doxysubsubsection*{Macros}
+\begin{Indent}\textbf{ Definitions for Display Size}\par
+{\em Number of visible lines and characters per line of the display.
+
+\begin{DoxyNote}{Note}
+All definitions added to the file lcd\+\_\+definitions.\+h will override the default definitions from lcd.\+h. Add -\/D\+\_\+\+LCD\+\_\+\+DEFINITIONS\+\_\+\+FILE to the CDEFS section in the Makefile. 
+\end{DoxyNote}
+}\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries LCD\+\_\+\+LINES}~2
+\begin{DoxyCompactList}\small\item\em Number of visible lines of the display. \end{DoxyCompactList}\item 
+\#define {\bfseries LCD\+\_\+\+DISP\+\_\+\+LENGTH}~16
+\begin{DoxyCompactList}\small\item\em Visibles characters per line of the display. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Definitions for 4-\/bit IO mode}\par
+{\em 4-\/bit mode definition of LCD signals on the Arduino Uno LCD Keypad Shield.
+
+The four LCD data lines and the two control lines RS, E can be on the same port or on different ports. R/W pin is directly connected to GND on LCD Keypad Shield and cannot be controlled.
+
+\begin{DoxyNote}{Note}
+All definitions added to the file lcd\+\_\+definitions.\+h will override the default definitions from lcd.\+h. Add -\/D\+\_\+\+LCD\+\_\+\+DEFINITIONS\+\_\+\+FILE to the CDEFS section in the Makefile. 
+\end{DoxyNote}
+}\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries LCD\+\_\+\+PORT}~PORTD
+\item 
+\#define {\bfseries LCD\+\_\+\+DATA0\+\_\+\+PORT}~LCD\+\_\+\+PORT
+\item 
+\#define {\bfseries LCD\+\_\+\+DATA1\+\_\+\+PORT}~LCD\+\_\+\+PORT
+\item 
+\#define {\bfseries LCD\+\_\+\+DATA2\+\_\+\+PORT}~LCD\+\_\+\+PORT
+\item 
+\#define {\bfseries LCD\+\_\+\+DATA3\+\_\+\+PORT}~LCD\+\_\+\+PORT
+\item 
+\#define {\bfseries LCD\+\_\+\+DATA0\+\_\+\+PIN}~PD4
+\begin{DoxyCompactList}\small\item\em Pin for HD44780 data pin D4. \end{DoxyCompactList}\item 
+\#define {\bfseries LCD\+\_\+\+DATA1\+\_\+\+PIN}~PD5
+\begin{DoxyCompactList}\small\item\em Pin for HD44780 data pin D5. \end{DoxyCompactList}\item 
+\#define {\bfseries LCD\+\_\+\+DATA2\+\_\+\+PIN}~PD6
+\begin{DoxyCompactList}\small\item\em Pin for HD44780 data pin D6. \end{DoxyCompactList}\item 
+\#define {\bfseries LCD\+\_\+\+DATA3\+\_\+\+PIN}~PD7
+\begin{DoxyCompactList}\small\item\em Pin for HD44780 data pin D7. \end{DoxyCompactList}\item 
+\#define {\bfseries LCD\+\_\+\+RS\+\_\+\+PORT}~PORTB
+\item 
+\#define {\bfseries LCD\+\_\+\+RS\+\_\+\+PIN}~PB0
+\item 
+\#define {\bfseries LCD\+\_\+\+E\+\_\+\+PORT}~PORTB
+\item 
+\#define {\bfseries LCD\+\_\+\+E\+\_\+\+PIN}~PB3
+\end{DoxyCompactItemize}
+\end{Indent}

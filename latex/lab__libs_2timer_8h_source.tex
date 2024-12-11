@@ -1,0 +1,79 @@
+\doxysection{timer.\+h}
+\hypertarget{lab__libs_2timer_8h_source}{}\label{lab__libs_2timer_8h_source}\index{lab\_libs/timer.h@{lab\_libs/timer.h}}
+\mbox{\hyperlink{lab__libs_2timer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TIMER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#\ define\ TIMER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{/***********************************************************}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ }}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ Timer\ library\ for\ AVR-\/GCC.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ (c)\ 2019-\/2024\ Tomas\ Fryza,\ MIT\ license}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Developed\ using\ PlatformIO\ and\ AVR\ 8-\/bit\ Toolchain\ 3.6.2.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ Tested\ on\ Arduino\ Uno\ board\ and\ ATmega328P,\ 16\ MHz.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ ***********************************************************/}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00033\ \textcolor{comment}{/*\ Includes\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <avr/io.h>}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{comment}{/*\ Defines\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ TIM1\_stop()\ TCCR1B\ \&=\ \string~((1<<CS12)\ |\ (1<<CS11)\ |\ (1<<CS10));}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ TIM1\_ovf\_4ms()\ TCCR1B\ \&=\ \string~((1<<CS12)\ |\ (1<<CS11));\ TCCR1B\ |=\ (1<<CS10);}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ TIM1\_ovf\_33ms()\ TCCR1B\ \&=\ \string~((1<<CS12)\ |\ (1<<CS10));\ TCCR1B\ |=\ (1<<CS11);}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ TIM1\_ovf\_262ms()\ TCCR1B\ \&=\ \string~(1<<CS12);\ TCCR1B\ |=\ (1<<CS11)\ |\ (1<<CS10);}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ TIM1\_ovf\_1sec()\ TCCR1B\ \&=\ \string~((1<<CS11)\ |\ (1<<CS10));\ TCCR1B\ |=\ (1<<CS12);}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ TIM1\_ovf\_4sec()\ TCCR1B\ \&=\ \string~(1<<CS11);\ TCCR1B\ |=\ (1<<CS12)\ |\ (1<<CS10);}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ TIM1\_ovf\_enable()\ TIMSK1\ |=\ (1<<TOIE1);}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ TIM1\_ovf\_disable()\ TIMSK1\ \&=\ \string~(1<<TOIE1);}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#define\ TIM0\_stop()\ TCCR0B\ \&=\ \string~((1<<CS02)\ |\ (1<<CS01)\ |\ (1<<CS00));}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ TIM0\_ovf\_16us()\ TCCR0B\ \&=\ \string~((1<<CS02)\ |\ (1<<CS01));\ TCCR0B\ |=\ (1<<CS00);}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ TIM0\_ovf\_128us()\ TCCR0B\ \&=\ \string~((1<<CS02)\ |\ (1<<CS00));\ TCCR0B\ |=\ (1<<CS01);}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ TIM0\_ovf\_1ms()\ TCCR0B\ \&=\ \string~(1<<CS02);\ TCCR0B\ |=\ (1<<CS01)\ |\ (1<<CS00);}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ TIM0\_ovf\_4ms()\ TCCR0B\ \&=\ \string~((1<<CS01)\ |\ (1<<CS00));\ TCCR0B\ |=\ (1<<CS02);}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ TIM0\_ovf\_16ms()\ TCCR0B\ \&=\ \string~(1<<CS01);\ TCCR0B\ |=\ (1<<CS02)\ |\ (1<<CS00);}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ TIM0\_ovf\_enable()\ TIMSK0\ |=\ (1<<TOIE0);}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ TIM0\_ovf\_disable()\ TIMSK0\ \&=\ \string~(1<<TOIE0);}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ TIM2\_stop()\ \ \ \ \ TCCR2B\ \&=\ \string~((1<<CS22)\ |\ (1<<CS21)\ |\ (1<<CS20));}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ TIM2\_ovf\_16us()\ TCCR2B\ \&=\ \string~((1<<CS22)\ |\ (1<<CS21));\ TCCR2B\ |=\ (1<<CS20);}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ TIM2\_ovf\_128us()\ TCCR2B\ \&=\ \string~((1<<CS22)\ |\ (1<<CS20));\ TCCR2B\ |=\ (1<<CS21);}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ TIM2\_ovf\_512us()\ TCCR2B\ \&=\ \string~(1<<CS22);\ TCCR2B\ |=\ (1<<CS21)\ |\ (1<<CS20);}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ TIM2\_ovf\_1ms()\ TCCR2B\ \&=\ \string~((1<<CS21)\ |\ (1<<CS20));\ TCCR2B\ |=\ (1<<CS20);}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ TIM2\_ovf\_2ms()\ TCCR2B\ \&=\ \string~(1<<CS21);\ TCCR2B\ |=\ (1<<CS22)\ |\ (1<<CS20);}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#define\ TIM2\_ovf\_4ms()\ TCCR2B\ \&=\ \string~(1<<CS20);\ TCCR2B\ |=\ (1<<CS22)\ |\ (1<<CS21);}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#define\ TIM2\_ovf\_16ms()\ TCCR2B\ |=\ (1<<CS22)\ |\ (1<<CS21)\ |\ (1<<CS20);}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#define\ TIM2\_ovf\_enable()\ \ TIMSK2\ |=\ (1<<TOIE2);}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#define\ TIM2\_ovf\_disable()\ TIMSK2\ \&=\ \string~(1<<TOIE2);}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

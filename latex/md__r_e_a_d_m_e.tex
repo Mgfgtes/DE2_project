@@ -1,0 +1,47 @@
+\chapter{Řešení semestrálního projektu z předmětu BPC-\/\+DE2}
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{Řešení semestrálního projektu z předmětu BPC-\/DE2@{Řešení semestrálního projektu z předmětu BPC-\/DE2}}
+\label{md__r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md0}%
+\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{\texorpdfstring{Téma\+: Sledování parametrů a optimalizace solárního panelu}{Téma\+: Sledování parametrů a optimalizace solárního panelu}}\label{md__r_e_a_d_m_e_autotoc_md1}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{\texorpdfstring{Na projektu pracovali\+:}{Na projektu pracovali\+:}}\label{md__r_e_a_d_m_e_autotoc_md2}
+
+\begin{DoxyItemize}
+\item Matěj Matoušek (247142) -\/ PWM
+\item Vojtěch Larva (246886) -\/ ADC
+\item Petr Losert (247140) -\/ LCD
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysection{\texorpdfstring{Hardwarové komponenty a schéma zapojení}{Hardwarové komponenty a schéma zapojení}}\label{md__r_e_a_d_m_e_autotoc_md3}
+
+\begin{DoxyItemize}
+\item Vývojová deska Arduino UNO
+\item Nabíjecí modul TP4056 se step-\/up měničem
+\item LCD displej 2x16 znaků HD44780
+\item Servo motory MG90S
+\item Solární panel
+\item Li-\/ion baterie
+\item Elektronické součástky\+: čtyři fotorezistory, čtyři 1 k\+Ohm rezistory, jeden 10 k\+Ohm potenciometrický trimr
+\end{DoxyItemize}
+
+\label{_servo}%
+ \hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{\texorpdfstring{Servo motory MG90S}{Servo motory MG90S}}\label{md__r_e_a_d_m_e_autotoc_md4}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{\texorpdfstring{Popis zapojení komponent}{Popis zapojení komponent}}\label{md__r_e_a_d_m_e_autotoc_md5}
+Projekt je realizován na na vývojové desce Arduino UNO postavené na 8-\/bitovém mikrokontroleru ATmega328P z rodiny AVR. Schéma fyzického zapojení je vyobrazeno na obrázku níže. Zapojena jsou dvě serva MG90S, která jsou řízena PWM signálem z digitálních pinů PB1 a PB2. V zapojení je použit nabíjecí modul TP4056 se step-\/up měničem, který nabíjí Li-\/ion baterii připojenou na výstupech "{}\+BAT+"{} a "{}\+BAT-\/"{} modulu. Na vstup nabíjecího modulu je připojen solární panel, který dobíjí baterii. Výstupní napětí je poté přivedeno na Arduino UNO desku. Stav napětí baterie je snímán a zpracováván na pinu PC4. Piny PC0 až PC3 jsou přivedeny na odporový dělič, který se skládá z rezistorů o hodnotě 1 k\+Ohm a fotorezistorů. Na těchto děličích je snímána o zpracovávána intenzita osvětlení fotorezistorů. K výstupnímu zobrazení je použit LCD displej HD44780, na kterém se zobrazují proměnné hodnoty udávající aktuální osvětlení a aktuální napětí baterie. ~\newline
+
+
+ Obrázek č. 2\+: Schéma zapojení\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysection{\texorpdfstring{Popis programové části}{Popis programové části}}\label{md__r_e_a_d_m_e_autotoc_md6}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysubsection{\texorpdfstring{Popis běhu programu}{Popis běhu programu}}\label{md__r_e_a_d_m_e_autotoc_md7}
+Ve funkci {\itshape int main(void)\{\}} nejprve nastavujeme piny pro PWM PB1 a PB2 jako výstupní. Poté probíhá inicializace UARTu, LCD displeje a nastavení časovače TIM1 pro PWM ({\itshape uart\+\_\+init(...);}, {\itshape lcd\+\_\+init(...);},{\itshape \doxylink{group__pwm_ga4d3917e0569ab08578809c113340e652}{TIM1\+\_\+pwm\+\_\+init()};}). Následně nastavíme povolovací vstup LCD displeje E (Enable) na nulu, čímž displej povolíme. Časovač TIM0 je využit pro mechanizmus přerušení, kdy jeho přetečení je nastaveno na 16 ms. Jeho nastavení probíhá v řádcích {\itshape \doxylink{group__fryza__timer_ga91a59d33b7d88f63b16bafa1abf4fb66}{TIM0\+\_\+ovf\+\_\+enable()};} -\/ povolení časovače, {\itshape \doxylink{group__fryza__timer_gaa06b2f1a2e4271fb35ffed0c32a74b3e}{TIM0\+\_\+ovf\+\_\+16ms()};} -\/ přetečení po 16 ms a {\itshape sei();} -\/ globálně povolit přerušení. Dále je zapnut ADC převodník pro výčet vstupních analogových hodnot ({\itshape \doxylink{group__adc_ga2b815e6730e8723a6d1d06d9ef8f31c0}{adc\+\_\+init()};}). ~\newline
+
+
+V nekonečné smyčce ({\itshape while(1)\{\}}) běží kód, kde jsou při podmínce setované vlajky {\itshape flag\+\_\+interrupt} vykonány tři definované funkce\+: {\itshape LCD\+\_\+print\+\_\+info();} -\/ výpis údajů na LCD displej, {\itshape battery\+\_\+voltage\+\_\+uart();} -\/ posílání údaje o napětí akumulátoru do sériového monitoru, slouží pro ladění programu a {\itshape position\+\_\+adjust();} -\/ slouží pro ovládání polohy servo motorů. Na konci podmínkového bloku je vlajka resetována.
+
+Vektor přerušení je volán každých 16 ms při přetečení čítače a obsahuje proměnnou {\itshape n\+\_\+ovs} a podmínku, která zajišťuje nastavení vlajky za každých 30 x 16 ms, tedy přibližně půl minuty. Po jejím nastavení je splněna podmínka v nekonečné smyčce a jsou opět provedeny funkce pro obsaluhu displeje a ovládání servo motorů. Půlminutový interval slouží pro demo aplikaci, aby bylo vidět otáčení servo motorů, avšak v praxi by dostačoval interval řádově delší z důvodu pomalého pohybu slunce. ~\newline
+
+
+ Obrázek č. 3\+: Schéma zapojení\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysection{\texorpdfstring{Fotodokumentace a uživatelské ovládání}{Fotodokumentace a uživatelské ovládání}}\label{md__r_e_a_d_m_e_autotoc_md8}
+ Obrázek č. 4\+: Fotografie zapojení
+
+ Obrázek č. 5\+: Fotografie zapojení
+
+Video ukázka\+: \href{https://vutbr-my.sharepoint.com/personal/247140_vutbr_cz/_layouts/15/stream.aspx?id=\%2Fpersonal\%2F247140\%5Fvutbr\%5Fcz\%2FDocuments\%2FVideo\%5Fukazka\%2Emov&referrer=StreamWebApp\%2EWeb&referrerScenario=AddressBarCopied\%2Eview\%2E12e79ec5\%2Dd800\%2D464e\%2D9faf\%2D22afffdf9a8a}{\texttt{ https\+://vutbr-\/my.\+sharepoint.\+com/personal/247140\+\_\+vutbr\+\_\+cz/\+\_\+layouts/15/stream.\+aspx?id=\%2\+Fpersonal\%2\+F247140\%5\+Fvutbr\%5\+Fcz\%2\+FDocuments\%2\+FVideo\%5\+Fukazka\%2\+Emov\&referrer=\+Stream\+Web\+App\%2\+EWeb\&referrer\+Scenario=\+Address\+Bar\+Copied\%2\+Eview\%2\+E12e79ec5\%2\+Dd800\%2\+D464e\%2\+D9faf\%2\+D22afffdf9a8a}}\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysection{\texorpdfstring{Použité nástroje}{Použité nástroje}}\label{md__r_e_a_d_m_e_autotoc_md9}
+Inkscape -\/ tvorba schémat ~\newline
+ Smart\+Draw -\/ tvorba vývojových diagramů 

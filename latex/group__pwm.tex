@@ -1,0 +1,91 @@
+\doxysection{PWM Library \texorpdfstring{$<$}{<}pwm.\+h\texorpdfstring{$>$}{>}}
+\hypertarget{group__pwm}{}\label{group__pwm}\index{PWM Library $<$pwm.h$>$@{PWM Library $<$pwm.h$>$}}
+
+
+PWM library for AVR-\/\+GCC.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__pwm_ga4d3917e0569ab08578809c113340e652}{TIM1\+\_\+pwm\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize Timer 1 for Fast PWM with frequency 50Hz. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pwm_gad05240ae7a2742c2bb86c36e204ce855}{TIM1\+\_\+pwm\+\_\+comp\+A\+\_\+value}} (uint16\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em Set pulse width to specific value by Comparator 0 of Timer 1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__pwm_ga30ee30c01da7c0800817f7a84a697cb5}{TIM1\+\_\+pwm\+\_\+comp\+B\+\_\+value}} (uint16\+\_\+t val)
+\begin{DoxyCompactList}\small\item\em Set pulse width to specific value by Comparator 1 of Timer 1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+PWM library for AVR-\/\+GCC. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{pwm_8h}{pwm.h}}>}\ }
+
+\end{DoxyCode}
+
+
+The library contains functions for controlling Timer\textquotesingle{}s 1 pin(s) with PWM.
+
+\begin{DoxyNote}{Note}
+Based on AVR Libc Reference Manual. Tested on ATmega328P (Arduino Uno), 16 MHz, AVR 8-\/bit 
+\end{DoxyNote}
+\begin{DoxyAuthor}{Author}
+Matej Matousek, Brno University of Technology, Czechia 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(c) 2024 Matej Matousek, This work is licensed under the terms of the MIT license 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{group__pwm_gad05240ae7a2742c2bb86c36e204ce855}\index{PWM Library $<$pwm.h$>$@{PWM Library $<$pwm.h$>$}!TIM1\_pwm\_compA\_value@{TIM1\_pwm\_compA\_value}}
+\index{TIM1\_pwm\_compA\_value@{TIM1\_pwm\_compA\_value}!PWM Library $<$pwm.h$>$@{PWM Library $<$pwm.h$>$}}
+\doxysubsubsection{\texorpdfstring{TIM1\_pwm\_compA\_value()}{TIM1\_pwm\_compA\_value()}}
+{\footnotesize\ttfamily \label{group__pwm_gad05240ae7a2742c2bb86c36e204ce855} 
+void TIM1\+\_\+pwm\+\_\+comp\+A\+\_\+value (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Set pulse width to specific value by Comparator 0 of Timer 1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Specific number between 0 and 3999 where increse by 1 represents 0,5 us. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\Hypertarget{group__pwm_ga30ee30c01da7c0800817f7a84a697cb5}\index{PWM Library $<$pwm.h$>$@{PWM Library $<$pwm.h$>$}!TIM1\_pwm\_compB\_value@{TIM1\_pwm\_compB\_value}}
+\index{TIM1\_pwm\_compB\_value@{TIM1\_pwm\_compB\_value}!PWM Library $<$pwm.h$>$@{PWM Library $<$pwm.h$>$}}
+\doxysubsubsection{\texorpdfstring{TIM1\_pwm\_compB\_value()}{TIM1\_pwm\_compB\_value()}}
+{\footnotesize\ttfamily \label{group__pwm_ga30ee30c01da7c0800817f7a84a697cb5} 
+void TIM1\+\_\+pwm\+\_\+comp\+B\+\_\+value (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Set pulse width to specific value by Comparator 1 of Timer 1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Specific number between 0 and 3999 where increse by 1 represents 0,5 us. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\Hypertarget{group__pwm_ga4d3917e0569ab08578809c113340e652}\index{PWM Library $<$pwm.h$>$@{PWM Library $<$pwm.h$>$}!TIM1\_pwm\_init@{TIM1\_pwm\_init}}
+\index{TIM1\_pwm\_init@{TIM1\_pwm\_init}!PWM Library $<$pwm.h$>$@{PWM Library $<$pwm.h$>$}}
+\doxysubsubsection{\texorpdfstring{TIM1\_pwm\_init()}{TIM1\_pwm\_init()}}
+{\footnotesize\ttfamily \label{group__pwm_ga4d3917e0569ab08578809c113340e652} 
+void TIM1\+\_\+pwm\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initialize Timer 1 for Fast PWM with frequency 50Hz. 
+
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}

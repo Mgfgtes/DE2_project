@@ -1,0 +1,71 @@
+\doxysection{ADC Library \texorpdfstring{$<$}{<}adc.\+h\texorpdfstring{$>$}{>}}
+\hypertarget{group__adc}{}\label{group__adc}\index{ADC Library $<$adc.h$>$@{ADC Library $<$adc.h$>$}}
+
+
+ADC library for AVR-\/\+GCC.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__adc_ga2b815e6730e8723a6d1d06d9ef8f31c0}{adc\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize Analog-\/digital converter. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{group__adc_gaae4bcfe4f7a97c36d689d5e28a3666b6}{adc\+\_\+read}} (uint8\+\_\+t channel)
+\begin{DoxyCompactList}\small\item\em Measure and convert to digital representation value from specific analog pin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+ADC library for AVR-\/\+GCC. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{adc_8h}{adc.h}}>}\ }
+
+\end{DoxyCode}
+
+
+The library contains functions for controlling Analog-\/digital converter.
+
+\begin{DoxyNote}{Note}
+Based on AVR Libc Reference Manual. Tested on ATmega328P (Arduino Uno), 16 MHz, AVR 8-\/bit 
+\end{DoxyNote}
+\begin{DoxyAuthor}{Author}
+Vojtech Larva, Brno University of Technology, Czechia 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(c) 2024 Vojtech Larva, This work is licensed under the terms of the MIT license 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{group__adc_ga2b815e6730e8723a6d1d06d9ef8f31c0}\index{ADC Library $<$adc.h$>$@{ADC Library $<$adc.h$>$}!adc\_init@{adc\_init}}
+\index{adc\_init@{adc\_init}!ADC Library $<$adc.h$>$@{ADC Library $<$adc.h$>$}}
+\doxysubsubsection{\texorpdfstring{adc\_init()}{adc\_init()}}
+{\footnotesize\ttfamily \label{group__adc_ga2b815e6730e8723a6d1d06d9ef8f31c0} 
+void adc\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Initialize Analog-\/digital converter. 
+
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\Hypertarget{group__adc_gaae4bcfe4f7a97c36d689d5e28a3666b6}\index{ADC Library $<$adc.h$>$@{ADC Library $<$adc.h$>$}!adc\_read@{adc\_read}}
+\index{adc\_read@{adc\_read}!ADC Library $<$adc.h$>$@{ADC Library $<$adc.h$>$}}
+\doxysubsubsection{\texorpdfstring{adc\_read()}{adc\_read()}}
+{\footnotesize\ttfamily \label{group__adc_gaae4bcfe4f7a97c36d689d5e28a3666b6} 
+uint16\+\_\+t adc\+\_\+read (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{channel}{}\end{DoxyParamCaption})}
+
+
+
+Measure and convert to digital representation value from specific analog pin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & Definition of pin for MUX of ADC (0-\/5 stand for PC0-\/\+PC5) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+16-\/bit integer value representation of voltage connected to selected pin 
+\end{DoxyReturn}
